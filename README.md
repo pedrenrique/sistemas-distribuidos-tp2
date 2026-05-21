@@ -1,6 +1,7 @@
 # Sistema P2P de Transferência de Arquivos
 **Disciplina:** Sistemas Distribuídos — CEFET-MG  
 **Trabalho Prático 2 — 2025/2**
+**Pedro Ferreira e Thiago Leonardo**
 
 ---
 
