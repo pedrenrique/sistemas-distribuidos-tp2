@@ -1,5 +1,5 @@
 #!/bin/bash
-# testar.sh — Executa os estudos de caso do Trabalho Prático 2
+# testar.sh
 #
 # Uso: ./testar.sh [cenario]
 #   ./testar.sh        — executa todos os cenários em sequência
@@ -133,27 +133,24 @@ CENARIO=${1:-"todos"}
 
 case "$CENARIO" in
     1) executar_cenario "2 peers | 10 KB  | bloco 1024 B" 2 10    1024 ;;
-    2) executar_cenario "2 peers | 10 KB  | bloco 4096 B" 2 10    4096 ;;
-    3) executar_cenario "2 peers | 20 KB  | bloco 1024 B" 2 20    1024 ;;
-    4) executar_cenario "2 peers | 1 MB   | bloco 1024 B" 2 1024  1024 ;;
-    5) executar_cenario "2 peers | 1 MB   | bloco 4096 B" 2 1024  4096 ;;
-    6) executar_cenario "2 peers | 5 MB   | bloco 1024 B" 2 5120  1024 ;;
-    7) executar_cenario "2 peers | 10 MB  | bloco 1024 B" 2 10240 1024 ;;
-    8) executar_cenario "4 peers | 1 MB   | bloco 1024 B" 4 1024  1024 ;;
-    9) executar_cenario "4 peers | 10 MB  | bloco 1024 B" 4 10240 1024 ;;
+    2) executar_cenario "2 peers | 1  MB  | bloco 1024 B" 2 1024  1024 ;;
+    3) executar_cenario "2 peers | 10 MB  | bloco 1024 B" 2 10240 1024 ;;
+    4) executar_cenario "4 peers | 20 KB  | bloco 4096 B" 4 20    4096 ;;
+    5) executar_cenario "4 peers | 5 MB   | bloco 4096 B" 4 5120  4096 ;;
+    6) executar_cenario "4 peers | 20 MB  | bloco 4096 B" 4 20480 4096 ;;
     todos)
+    
         titulo "EXECUTANDO TODOS OS CENÁRIOS"
         executar_cenario "2 peers | 10 KB  | bloco 1024 B" 2 10    1024
-        executar_cenario "2 peers | 10 KB  | bloco 4096 B" 2 10    4096
-        executar_cenario "2 peers | 1 MB   | bloco 1024 B" 2 1024  1024
-        executar_cenario "2 peers | 1 MB   | bloco 4096 B" 2 1024  4096
+        executar_cenario "2 peers | 1  MB  | bloco 1024 B" 2 1024  1024
         executar_cenario "2 peers | 10 MB  | bloco 1024 B" 2 10240 1024
-        executar_cenario "4 peers | 1 MB   | bloco 1024 B" 4 1024  1024
-        executar_cenario "4 peers | 10 MB  | bloco 1024 B" 4 10240 1024
+        executar_cenario "4 peers | 20 KB  | bloco 4096 B" 4 20    4096
+        executar_cenario "4 peers | 5 MB   | bloco 4096 B" 4 5120  4096
+        executar_cenario "4 peers | 20 MB  | bloco 4096 B" 4 20480 4096
         titulo "TODOS OS CENÁRIOS CONCLUÍDOS"
         ;;
     *)
-        echo "Cenário '$CENARIO' inválido. Use 1-9 ou 'todos'."
+        echo "Cenário '$CENARIO' inválido. Use 1-6 ou 'todos'."
         exit 1
         ;;
 esac
