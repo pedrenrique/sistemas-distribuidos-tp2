@@ -1,9 +1,6 @@
 /*
  * par.h — Header principal do sistema P2P de transferência de arquivos
  *
- * Disciplina: Sistemas Distribuídos — CEFET-MG
- * Trabalho Prático 2 — 2025/2
- *
  * Cada par atua simultaneamente como Servidor (serve blocos) e
  * Cliente (baixa blocos de vizinhos configurados estaticamente).
  */
@@ -27,9 +24,7 @@
 #include <signal.h>
 #include <fcntl.h>
 
-/* ================================================================
- * CONSTANTES DE CONFIGURAÇÃO
- * ================================================================ */
+/* CONSTANTES DE CONFIGURAÇÃO */
 
 #define TAMANHO_BLOCO_PADRAO   1024   /* 1 KB por bloco (padrão) */
 #define MAX_VIZINHOS           10     /* máximo de vizinhos por par */
@@ -39,9 +34,8 @@
 #define INTERVALO_TENTATIVA    2      /* segundos entre rodadas de download */
 #define TAMANHO_BUF_MSG        (16 * 1024 * 1024)  /* buffer max por bloco: 16 MB */
 
-/* ================================================================
+/*
  * TIPOS DE MENSAGEM DO PROTOCOLO
- * ================================================================
  *
  * Protocolo binário simples:
  *   [1 byte: tipo] [4 bytes: num_bloco BE] [4 bytes: tam_dados BE] [dados...]
@@ -58,9 +52,7 @@
 #define MSG_RESP_BLOCO     0x04
 #define MSG_SEM_BLOCO      0x05
 
-/* ================================================================
- * ESTRUTURAS
- * ================================================================ */
+/* ESTRUTURAS */
 
 /*
  * CabecalhoMsg — cabeçalho fixo de 9 bytes enviado em toda mensagem
@@ -97,31 +89,31 @@ typedef struct {
  * Uma única instância global é usada (estado_global)
  */
 typedef struct {
-    /* ---- Identificação ---- */
+    /* Identificação */
     char ip_proprio[64];
     int  porta_propria;
 
-    /* ---- Caminhos de arquivo ---- */
+    /* Caminhos de arquivo */
     char arquivo_origem[512];   /* arquivo a compartilhar (seeder) */
     char arquivo_destino[512];  /* onde salvar o arquivo baixado (leecher) */
     char dir_blocos[512];       /* diretório temporário para os blocos */
     char caminho_meta[512];     /* arquivo .meta com metadados */
 
-    /* ---- Metadados e bitmap ---- */
+    /* Metadados e bitmap */
     MetadadoArquivo meta;
     uint8_t        *bitmap;          /* bitmap[i]=1 → tenho bloco i */
     int             blocos_recebidos;
     int             eh_seeder;       /* 1 → inicia com arquivo completo */
 
-    /* ---- Sincronização ---- */
+    /* Sincronização */
     pthread_mutex_t mutex_bitmap; /* protege bitmap e blocos_recebidos */
     pthread_mutex_t mutex_log;    /* serializa saída no terminal */
 
-    /* ---- Topologia ---- */
+    /* Topologia */
     Vizinho vizinhos[MAX_VIZINHOS];
     int     num_vizinhos;
 
-    /* ---- Estado de execução ---- */
+    /* Estado de execução */
     int download_completo; /* 1 quando todos os blocos foram recebidos */
 } EstadoPar;
 
@@ -135,9 +127,7 @@ typedef struct {
     EstadoPar         *estado;
 } ArgConexao;
 
-/* ================================================================
- * PROTÓTIPOS DE FUNÇÕES
- * ================================================================ */
+/* PROTÓTIPOS DE FUNÇÕES */
 
 /* Logging */
 void log_msg(EstadoPar *estado, const char *formato, ...);
