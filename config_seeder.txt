@@ -1,0 +1,27 @@
+# config_seeder.txt — Configuração do par seeder (Peer A)
+# Possui o arquivo completo e o compartilha com os leechers
+
+# Endereço IP deste par (use 127.0.0.1 para testes locais)
+ip=127.0.0.1
+
+# Porta TCP em que este par ouvirá conexões
+porta=5001
+
+# 1 = seeder (tem o arquivo completo), 0 = leecher
+seeder=1
+
+# Caminho do arquivo original a ser compartilhado
+arquivo=./arquivo_teste.bin
+
+# Onde salvar o arquivo baixado (não usado pelo seeder, mas deve ser preenchido)
+destino=./baixado_seeder.bin
+
+# Arquivo de metadados (será CRIADO pelo seeder e LIDO pelos leechers)
+meta=./arquivo.meta
+
+# Diretório onde os blocos serão armazenados temporariamente
+blocos=./blocos_seeder
+
+# Vizinhos conhecidos (seeder não precisa baixar de ninguém)
+# Deixe vazio ou remova a linha
+vizinhos=

@@ -1,0 +1,13 @@
+# config_leecher2.txt — Configuração do leecher 2 (Peer C)
+# Baixa do seeder E do leecher1 (teste com 3+ peers)
+
+ip=127.0.0.1
+porta=5003
+seeder=0
+arquivo=
+destino=./baixado_leecher2.bin
+meta=./arquivo.meta
+blocos=./blocos_leecher2
+
+# Conhece o seeder e o leecher1
+vizinhos=127.0.0.1:5001,127.0.0.1:5002
