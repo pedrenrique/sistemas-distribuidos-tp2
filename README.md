@@ -20,24 +20,6 @@ Cada **par** (peer) roda dois processos lógicos em paralelo:
 
 ---
 
-## Protocolo de Mensagens
-
-Todas as mensagens têm um **cabeçalho fixo de 9 bytes** seguido de dados opcionais:
-
-```
-[1 byte: tipo] [4 bytes: num_bloco, big-endian] [4 bytes: tam_dados, big-endian] [dados...]
-```
-
-| Tipo | Valor | Direção | Significado |
-|------|-------|---------|-------------|
-| MSG_LISTAR_BLOCOS | 0x01 | cliente→servidor | "Quais blocos você tem?" |
-| MSG_RESP_BLOCOS   | 0x02 | servidor→cliente | Bitmap de blocos disponíveis |
-| MSG_PEDIR_BLOCO   | 0x03 | cliente→servidor | "Me manda o bloco N" |
-| MSG_RESP_BLOCO    | 0x04 | servidor→cliente | Dados do bloco N |
-| MSG_SEM_BLOCO     | 0x05 | servidor→cliente | "Não tenho o bloco N" |
-
----
-
 ## Arquivo de Configuração
 
 ```ini
@@ -152,14 +134,12 @@ chmod +x testar.sh
 | # | Peers | Arquivo | Bloco | Config |
 |---|-------|---------|-------|--------|
 | 1 | 2 | 10 KB  | 1024 B | `./testar.sh 1` |
-| 2 | 2 | 10 KB  | 4096 B | `./testar.sh 2` |
-| 3 | 2 | 20 KB  | 1024 B | `./testar.sh 3` |
-| 4 | 2 | 1 MB   | 1024 B | `./testar.sh 4` |
-| 5 | 2 | 1 MB   | 4096 B | `./testar.sh 5` |
-| 6 | 2 | 5 MB   | 1024 B | `./testar.sh 6` |
-| 7 | 2 | 10 MB  | 1024 B | `./testar.sh 7` |
-| 8 | 4 | 1 MB   | 1024 B | `./testar.sh 8` |
-| 9 | 4 | 10 MB  | 1024 B | `./testar.sh 9` |
+| 2 | 2 | 1 MB   | 1024 B | `./testar.sh 2` |
+| 3 | 2 | 10 MB  | 1024 B | `./testar.sh 3` |
+| 4 | 2 | 20 KB  | 4096 B | `./testar.sh 4` |
+| 5 | 2 | 5 MB   | 4096 B | `./testar.sh 5` |
+| 6 | 4 | 20 MB  | 4096 B | `./testar.sh 6` |
+
 
 ---
 
@@ -183,7 +163,7 @@ p2p/
 
 ## Decisões de Projeto
 
-**Linguagem:** C padrão (C99) com pthreads — sem dependências externas.
+**Linguagem:** C padrão com pthreads — sem dependências externas.
 
 **SHA-256:** Implementação própria em `sha256.h` (FIPS 180-4), sem OpenSSL.
 
